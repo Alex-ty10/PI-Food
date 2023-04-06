@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Form = () => {
+const Landing = () => {
   return (
     <div>
-      Form
+      Landing
     </div>
   )
 };
 
 
-export default Form;
+export default Landing;

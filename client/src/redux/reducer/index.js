@@ -65,7 +65,7 @@ function rootReducer(state = inicialState, action){
           })
           return {
             ...state,
-            countries: orderingName,
+            recipes: orderingName,
           };
 
          /*  case GET_COUNTRY_NAME:
@@ -83,27 +83,27 @@ function rootReducer(state = inicialState, action){
           state.recipes.sort((a, b) => Number(a.healthScore) - Number(b.healthScore))
           return{
             ...state,
-            countries: orderingHealthScore
+            recipes: orderingHealthScore
           };
 
         case FILTER_BY_DIETS:
           const allRecipes = state.allRecipes;
           const filterRecipe = action.payload === 'All' ? allRecipes.filter(r => r.diets.length > 0)
-          : allRecipes.filter(r => r.recipes.find(r => r.name === action.payload))
+          : allRecipes.filter(r => r.diets.find(r => r.name ?  r.name === action.payload : r === action.payload))
         return{
           ...state,
-          countries: filterRecipe
+          recipes: filterRecipe
         };
 
         
 
         case FILTER_BY_SOURCE:
           const allRecipe2 = state.allRecipes
-          const filterRecipe2 = action.payload === 'DB' ? allRecipe2.filter(r => r.createdInDB)
-          : allRecipe2.filter(r => !r.createdInDB)
+          const filterRecipe2 = action.payload === 'DB' ? allRecipe2.filter(r => r.createdInDb)
+          : allRecipe2.filter(r => !r.createdInDb)
         return{
           ...state,
-          countries: filterRecipe2
+          recipes: filterRecipe2
         };
   
     default: return state

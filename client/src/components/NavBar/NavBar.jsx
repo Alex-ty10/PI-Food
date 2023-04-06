@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Form = () => {
+const NavBar = () => {
   return (
     <div>
-      Form
+      NavBar
     </div>
   )
 };
 
 
-export default Form;
+export default NavBar;

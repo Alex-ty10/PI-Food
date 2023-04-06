@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Form = () => {
+const NotFound = () => {
   return (
     <div>
-      Form
+      NotFound
     </div>
   )
 };
 
 
-export default Form;
+export default NotFound;

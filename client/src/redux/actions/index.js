@@ -44,7 +44,7 @@ export const getRecipeID = (id) => {
 export const getRecipeName = (name) => {
   return async(dispatch) => {
     try {
-      let response = await axios.get(`/recipe?name=${name}`)
+      let response = await axios.get(`/recipes?name=${name}`)
       const recipeName = response.data
       return dispatch({
         type: GET_RECIPE_NAME,
@@ -58,7 +58,7 @@ export const getRecipeName = (name) => {
 
 export const createRecipe = (payload) => {
   return async(dispatch) => {
-      let response = await axios.post('/recipe',payload)
+      let response = await axios.post('/recipes',payload)
       return dispatch({
         type: CREATE_RECIPE,
         payload: response
