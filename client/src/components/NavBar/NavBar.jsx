@@ -11,7 +11,7 @@ const NavBar = () => {
           <div className='nav-links__div'>Home</div>
         </NavLink>
         <NavLink to='/create'>
-          <div className='nav-links__div'>Create a activity</div>
+          <div className='nav-links__div'>New recipe</div>
         </NavLink>
       </div>
       <div>
