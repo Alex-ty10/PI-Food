@@ -5,7 +5,6 @@ import { getAllRecipes } from '../../redux/actions';
 import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
 import OrderingFilters from '../Ordering&Filters/Ordering&Filters'
-import SearchBar from '../SearchBar/SearchBar';
 
 
 const Home = () => {
@@ -34,7 +33,6 @@ const Home = () => {
   return (
     <div className='container'>
       <div>
-        <SearchBar/>
         <OrderingFilters ordering={ordering}/>
       </div>
       <div>
