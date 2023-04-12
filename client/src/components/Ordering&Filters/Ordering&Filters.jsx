@@ -1,10 +1,11 @@
+import './orderingfilters.css'
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDiets, filterByDiets, filterBySource, orderByName, orderByHealthScore } from '../../redux/actions';
 import { useHistory } from 'react-router-dom';
 
 
-const OrderingFilters = ({ ordering }) => {
+const OrderingFilters = () => {
 
   const histoty = useHistory();
   const dispatch =  useDispatch();
@@ -17,13 +18,13 @@ const OrderingFilters = ({ ordering }) => {
   const handleOrderingByName = (e) => {
     e.preventDefault();
     dispatch(orderByName(e.target.value));
-    ordering(1,`Ordering ${e.target.value}`)
+    /* ordering(1,`Ordering ${e.target.value}`) */
   }
   
   const handleOrderingByHealthScore = (e) => {
     e.preventDefault();
     dispatch(orderByHealthScore(e.target.value));
-    ordering(1, `Ordering ${e.target.value}`)
+    /* ordering(1, `Ordering ${e.target.value}`) */
   }
 
   const handleFilterByDiets = (e) => {
@@ -41,7 +42,7 @@ const OrderingFilters = ({ ordering }) => {
   }
 
   return (
-    <div className='container'>
+    <div className='container-filters'>
       <select defaultValue='default' className='container-select' onChange={handleOrderingByName}>
         <option className='container-select__option' hidden value='default'>Order By Name</option>
         <option className='container-select__option' value='A - Z'>A - Z</option>
@@ -68,7 +69,7 @@ const OrderingFilters = ({ ordering }) => {
         <option className='container-select__option' value='API'>API</option>
       </select>
 
-      <button className='clear-btn' onClick={handleClearFilter}>Clear Filters</button>
+      <button className='container-btn' onClick={handleClearFilter}>Clear Filters</button>
 
     </div>
   )

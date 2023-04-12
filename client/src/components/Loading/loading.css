@@ -1,0 +1,17 @@
+.loading{
+  margin-left: 20rem;
+  height: 100%;
+  background-color: #5fc7ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 19.5rem;
+}
+
+
+.loading img{
+  width: 7rem;
+  border-radius: 15px;
+  border: solid #000;
+}

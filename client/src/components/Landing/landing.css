@@ -1,0 +1,33 @@
+.landingPage {
+  font-family: 'Century Gothic', sans-serif;
+  height: 100vh;
+  background-image: url('../../assets/back.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ladingPage-tittle {
+  font-size: 80px;
+  color: #ffffff;
+  text-shadow: 0 0 300px #00000a;
+  text-decoration: none;
+}
+
+.ladingPage-link {
+  font-size: 30px;
+  border-radius: 9px;
+  background-color: transparent;
+  color: #ffffff;
+  font-weight: bold;
+  border: 5px solid;
+  padding: 20px 30px;
+  cursor: pointer;
+}
+
+.ladingPage-link:hover {
+  background-color: #535b88;
+}

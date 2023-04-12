@@ -1,0 +1,55 @@
+.nav-container {
+  background-color:transparent;
+  position: fixed;
+  width: 20rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: auto;
+}
+
+.nav-logo{
+width: auto;
+height: auto;
+text-decoration: none;
+margin: 2rem 2rem ;
+}
+
+.nav-logo button{
+  background-color: transparent;
+  border: none;
+}
+
+.nav-searchbar{
+padding: 2rem;
+margin: 0 2rem;
+}
+
+.nav-filters{
+  width: 20rem;
+  height: auto;
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.nav-create{
+  width: auto;
+  height: auto;
+  margin: 2rem auto;
+}
+
+.nav-create__btn{
+  width: 10rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: auto;
+  background-color: #5fc7ff;
+}
+
+.nav-create__btn:hover{
+  transform: scale(1.1);
+  background-color: #00b8ff;
+}

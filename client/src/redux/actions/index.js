@@ -9,6 +9,8 @@ export const ORDER_BY_NAME = 'ORDER_BY_NAME'
 export const ORDER_BY_HEALTHSCORE = 'ORDER_BY_HEALTHSCORE'
 export const FILTER_BY_DIETS = 'FILTER_BY_DIETS'
 export const FILTER_BY_SOURCE = 'FILTER_SOURCE'
+export const DELETE_RECIPE = 'DELETE_RECIPE'
+export const CURRENT_PAGE = 'CURRENT_PAGE'
 
 
 export const getAllRecipes = () => {
@@ -105,3 +107,20 @@ export const filterBySource = (payload) => {
    return dispatch({type: FILTER_BY_SOURCE, payload})
   }
 };
+
+export const deleteRecipe = (id) => {
+  return async(dispatch) => {
+    let response = await axios.delete(`/recipes/delete/${id}`)
+    return dispatch({
+      type: DELETE_RECIPE,
+      payload: response
+    })
+  }
+};
+
+export const currentPage = (payload) => {
+  return(dispatch) => {
+    return dispatch({type: CURRENT_PAGE, payload})
+  }
+}
+

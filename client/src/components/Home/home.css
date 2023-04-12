@@ -1,0 +1,27 @@
+.container{
+  background-color: #5fc7ff;
+  margin-left: 20rem;
+  padding: 2rem;
+  color: #000;
+  text-decoration: none;
+
+}
+
+.container-cards{
+  display: grid;
+  height: 68rem;
+  grid-template-columns: repeat(3,auto);
+  grid-template-rows: repeat(3,auto);
+  margin: 0, 5rem;
+  justify-content: center;
+}
+
+.container-cards button{
+  background-color: transparent;
+  border: none;
+}
+
+.home-pagination{
+  margin-top: 2rem;
+  bottom: 0rem;
+}

@@ -1,4 +1,4 @@
-import './App.css';
+
 import { Route, Switch, useLocation } from 'react-router-dom'
 import Home from './components/Home/Home';
 import DetailCard from './components/DetailCard/DetailCard';

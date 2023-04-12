@@ -1,0 +1,112 @@
+.container-detail{
+  margin-left: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #5fc7ff;
+  color: #ffffff;
+}
+
+.datail-image img{ width: 100hv; 
+  border-radius: 15px;
+}
+
+.name-health {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name{
+  color: #000;
+  font-size: 1.2rem;
+  border-bottom: solid #000;
+  margin: 3rem;
+}
+
+.health{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.health p {
+  text-align: center;
+  color: #000;
+
+}
+
+.health img{
+  align-self: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+.diets-detail{
+align-self: flex-start;
+padding: 3rem;
+display:flex;
+font-size: 20px;
+font-weight: bold;
+color: #000;
+}
+
+.lista{
+  display: flex;
+  list-style: none;
+  margin:0 5px;
+  border: none;
+}
+
+.lista li{
+  background-color: #ffffff;
+  color: #000;
+  margin: 0 5px;
+  border:solid 2px #000;
+  border-radius: 10px;
+  padding: 5px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.info-detail{
+  display: flex;
+  padding: 0 2rem;
+  justify-content: space-between;
+}
+
+.info-summary{
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 45%;
+  color: #000;
+  padding: 2rem;
+  border: solid 2px #000;
+ 
+}
+
+.info-summary h2{
+  font-size: 1.7rem;
+  color: #000;
+  margin: 2rem;
+  border-bottom:solid #000;
+}
+
+.info-instructions{
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 45%;
+  color: #000;
+  padding: 2rem;
+  border: solid 2px #000;
+}
+
+.info-instructions h2{
+  font-size: 1.7rem;
+  color: #000;
+  margin: 2rem;
+  border-bottom:solid #000;
+}

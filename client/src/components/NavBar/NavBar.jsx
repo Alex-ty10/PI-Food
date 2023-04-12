@@ -1,21 +1,33 @@
+import './navBar.css'
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
+import LogoOl from '../LogoOl/LogoOI';
+import OrderingFilters from '../Ordering&Filters/Ordering&Filters';
+
 
 const NavBar = () => {
   return (
-    <div className='nav-conatainer'>
-      <div className='nav-logo'>logo</div>
-      <div className='nav-links'>
-        <NavLink to='/home'>
-          <div className='nav-links__div'>Home</div>
-        </NavLink>
-        <NavLink to='/create'>
-          <div className='nav-links__div'>New recipe</div>
+    <div className='nav-container'>
+      <div className='nav-logo'>
+        <NavLink to='/home' className='nav-logo'>
+          <button ><LogoOl/></button>
         </NavLink>
       </div>
-      <div>
-      <SearchBar/>
+      
+      <div className='nav-searchbar'>
+        <SearchBar/>
+      </div>
+
+      <div className='nav-create'>
+        <NavLink to='/create' >
+          <button className='nav-create__btn'>New recipe</button>
+        </NavLink>
+      </div>
+
+      <div className='nav-filters'>
+        <h2>Filters:</h2>
+        <OrderingFilters/>
       </div>
     </div>
   )

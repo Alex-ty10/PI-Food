@@ -7,7 +7,10 @@ import {
   ORDER_BY_NAME,
   ORDER_BY_HEALTHSCORE,
   FILTER_BY_DIETS,
-  FILTER_BY_SOURCE
+  FILTER_BY_SOURCE,
+  DELETE_RECIPE,
+  CURRENT_PAGE,
+  LOADING
 } from '../actions/index';
 
 const inicialState = {
@@ -15,6 +18,8 @@ const inicialState = {
   recipes: [],
   recipe: [],
   diets: [],
+  page: 1,
+  order:'',
 }
 
 function rootReducer(state = inicialState, action){
@@ -25,6 +30,7 @@ function rootReducer(state = inicialState, action){
         ...state,
         allRecipes: action.payload,
         recipes: action.payload,
+        page: 1
       };
 
       case GET_RECIPE_ID:
@@ -66,6 +72,8 @@ function rootReducer(state = inicialState, action){
           return {
             ...state,
             recipes: orderingName,
+            page: 1,
+            order:`Ordering ${action.payload}`
           };
 
          /*  case GET_COUNTRY_NAME:
@@ -83,7 +91,9 @@ function rootReducer(state = inicialState, action){
           state.recipes.sort((a, b) => Number(a.healthScore) - Number(b.healthScore))
           return{
             ...state,
-            recipes: orderingHealthScore
+            recipes: orderingHealthScore,
+            page: 1,
+            order:`Ordering ${action.payload}`
           };
 
         case FILTER_BY_DIETS:
@@ -92,7 +102,8 @@ function rootReducer(state = inicialState, action){
           : allRecipes.filter(r => r.diets.find(r => r.name ?  r.name === action.payload : r === action.payload))
         return{
           ...state,
-          recipes: filterRecipe
+          recipes: filterRecipe,
+          page: 1
         };
 
         
@@ -103,8 +114,20 @@ function rootReducer(state = inicialState, action){
           : allRecipe2.filter(r => !r.createdInDb)
         return{
           ...state,
-          recipes: filterRecipe2
+          recipes: filterRecipe2,
+          page: 1
         };
+
+        case DELETE_RECIPE:
+          return{
+            ...state,
+          };
+        
+        case CURRENT_PAGE:
+          return{
+            ...state,
+            page: action.payload
+          }
   
     default: return state
     

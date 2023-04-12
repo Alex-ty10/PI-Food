@@ -1,3 +1,4 @@
+import './form.css'
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -12,6 +13,9 @@ const validate = (input, recipes) => {
   if (!input.name.trim()) {errors.name = 'Add a name';};
   if (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1\s]+$/.test(input.name)) {errors.name = 'Name can only contain letters'};
   if(recipes.includes(input.name.trim())) {errors.name = 'This recipe already exists'};
+
+  //validacion image url
+  if (/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(input.image)) {errors.image = 'The URL is not valid'}
   
   //validacion summary
   if(!input.summary) {errors.summary = 'Add a summary'};
@@ -98,7 +102,7 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (Object.keys(error).length === 0){
+    if (Object.keys(error).length === 0 && input.name.length > 0){
       dispatch(createRecipe(input));
       alert('Your recipe has been created successfully!!')
       setInput({
@@ -119,75 +123,86 @@ const Form = () => {
     <div className='container-form'>
       <h1 className='tittle-form'>Create your Recipe!!</h1>
       <form className='form' onSubmit={handleSubmit}>
-        <div className='form-name'>
+        <div className='form-inpus'>
           <label className='form-name__label'>Name: </label>
           <input type='text'
                  value={input.name}
                  name='name'
                  autoComplete='off'
                  placeholder='Name'
-                 onChange={handleChange}/>
+                 onChange={handleChange}
+                 className='form-input'/>
               {
                       error.name && (
-                          <p>{error.name}</p>
+                          <p className='form-p'>{error.name}</p>
                       )
                   }
         </div>
 
-        <div className='form-image'>
+        <div className='form-inpus'>
           <label className='form-image__label'>Image: </label>
+          <input type='text'
+                 value={input.image}
+                 name='image'
+                 autoComplete='off'
+                 placeholder='Image URL'
+                 onChange={handleChange}
+                 className='form-input'/>
+              {
+                      error.image && (
+                          <p className='form-p'>{error.image}</p>
+                      )
+                  }
         </div>
 
-        <div className='form-summary'>
+        <div className='form-inpus'>
           <label className='form-summary__label'>Summary: </label>
           <textarea value={input.summary}
-                    rows='5' 
-                    cols='50'
                     name='summary'
                     autoComplete='off'
                     placeholder='Summary...'
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    className='form-textarea'/>
               {
                       error.summary && (
-                          <p>{error.summary}</p>
+                          <p className='form-p'>{error.summary}</p>
                       )
                   }
         </div>
 
-        <div className='form-healthScore'>
+        <div className='form-inpus'>
           <label className='form-healthScore__label'>healthScore: </label>
           <input type='range'
                  name='healthScore'
                  min='0'
                  max='100'
                  value={input.healthScore}
-                 onChange={handleChange}/>
+                 onChange={handleChange}
+                 className='form-input'/>
           <p>{input.healthScore}</p>
               {
                       error.healthScore && (
-                          <p>{error.healthScore}</p>
+                          <p className='form-p'>{error.healthScore}</p>
                       )
                   }
         </div>
 
-        <div className='form-instructions'>
+        <div className='form-inpus'>
           <label className='form-instructions__label'>instructions: </label>
-          <input type='textarea'
-                 value={input.instructions}
-                 rows='5' 
-                 cols='50'
-                 name='instructions'
-                 autoComplete='off'
-                 placeholder='instructions...'
-                 onChange={handleChange}/>
+          <textarea value={input.instructions}
+                    name='instructions'
+                    autoComplete='off'
+                    placeholder='instructions...'
+                    onChange={handleChange}
+                    className='form-textarea'/>
               {
                       error.instructions && (
-                          <p>{error.instructions}</p>
+                          <p className='form-p'>{error.instructions}</p>
                       )
                   }
         </div>
 
-        <div className='form-diets'>
+        <div className='form-inpus'>
           <label className='form-diets__label'>Diets: </label>
           <select name='diets' onChange={handleSelect}>
             <option hidden value='default'>Diets</option>
@@ -197,7 +212,7 @@ const Form = () => {
           </select>
           {
                       error.diets && (
-                          <p>{error.diets}</p>
+                          <p className='form-p'>{error.diets}</p>
                       )
                   }
           
@@ -212,10 +227,10 @@ const Form = () => {
         </div>
 
         <div className='form-submit'>
-          <button className='form-submit__btn' type='submit'>Create</button>
+          <button className='btn' type='submit'>Create</button>
         </div>
       </form>
-      <NavLink to='/home'><button className="btn">back</button></NavLink>
+      <NavLink to='/home'><button className='btn' >back</button></NavLink>
     </div>
   )
 };
