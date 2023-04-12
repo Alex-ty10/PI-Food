@@ -15,6 +15,7 @@ const instructionsArray = (instructions) => {
 module.exports = getApiRecipes = async () => {
   try {
     const { data } = await axios.get(`${API_URL}/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
+    //const { data } = await axios.get(`https://run.mocky.io/v3/84b3f19c-7642-4552-b69c-c53742badee5`);
 
     const allRecipes = data.results.map(r => {
       return {
@@ -31,6 +32,6 @@ module.exports = getApiRecipes = async () => {
     
     return allRecipes
   } catch (e) {
-    return next(e)
+    return e
   }
 }

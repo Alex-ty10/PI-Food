@@ -1,6 +1,10 @@
-const { Recipe } = require ('../db');
+const { Recipe } = require('../db');
 
-module.exports = deleteRecipe = async(name) => {
-  const recipe = await Recipe.findOne({ where:{name}});
+module.exports = async (id) => {
+  const recipe = await Recipe.findByPk(id);
+  if (!recipe) {
+    throw new Error(`Recipe with id ${id} not found`);
+  }
   await recipe.destroy();
 };
+

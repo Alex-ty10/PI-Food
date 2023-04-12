@@ -58,17 +58,19 @@ router.get('/:id', async (req, res, next) => {
   
 })
 
-router.delete('/delete', async(req, res, next) => {
+router.delete('/delete/:id', async (req, res, next) => {
   try {
-    const { name } = req.query;
-    if(name){
-      deleteRec = await deleteRecipe(name)
-      return res.status(200).send(`The recipe ${name} has been deleted`)
+    const { id } = req.params;
+    if(!id) {
+      return res.status(400).send('Recipe ID was not provided');
     }
+    await deleteRecipe(id);
+    return res.status(200).send(`Recipe has been deleted`);
   } catch (e) {
-    return next(e)
+    return next(e);
   }
-})
+});
+
 
 //ruta creadora de la receta
 router.post('/', async (req, res, next) => {

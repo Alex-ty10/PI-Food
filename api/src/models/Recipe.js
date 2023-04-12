@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
       }
     },
     instructions:{
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     createdInDb: {
