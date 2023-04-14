@@ -10,7 +10,7 @@ import {
   FILTER_BY_SOURCE,
   DELETE_RECIPE,
   CURRENT_PAGE,
-  LOADING
+  CLEAR_DETAIL
 } from '../actions/index';
 
 const inicialState = {
@@ -128,6 +128,13 @@ function rootReducer(state = inicialState, action){
             ...state,
             page: action.payload
           }
+
+          case CLEAR_DETAIL:
+            return{
+              ...state,
+              recipes: [],
+              recipe: []
+            }
   
     default: return state
     

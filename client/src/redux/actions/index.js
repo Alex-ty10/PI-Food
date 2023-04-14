@@ -11,6 +11,7 @@ export const FILTER_BY_DIETS = 'FILTER_BY_DIETS'
 export const FILTER_BY_SOURCE = 'FILTER_SOURCE'
 export const DELETE_RECIPE = 'DELETE_RECIPE'
 export const CURRENT_PAGE = 'CURRENT_PAGE'
+export const CLEAR_DETAIL = 'CLEAR_DETAIL'
 
 
 export const getAllRecipes = () => {
@@ -110,11 +111,16 @@ export const filterBySource = (payload) => {
 
 export const deleteRecipe = (id) => {
   return async(dispatch) => {
-    let response = await axios.delete(`/recipes/delete/${id}`)
-    return dispatch({
-      type: DELETE_RECIPE,
-      payload: response
-    })
+    try {
+      let response = await axios.delete(`/recipes/delete/${id}`)
+      return dispatch({
+        type: DELETE_RECIPE,
+        payload: response
+      })
+      
+    } catch (e) {
+      alert ('Could not delete recipe')
+    }
   }
 };
 
@@ -124,3 +130,10 @@ export const currentPage = (payload) => {
   }
 }
 
+export const clearDetail = () => {
+  return(dispatch) => {
+    return dispatch({
+      type: CLEAR_DETAIL
+    })
+  }
+}

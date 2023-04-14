@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { getAllRecipes, createRecipe, getAllDiets } from '../../redux/actions';
+import { getAllRecipes, createRecipe, getAllDiets, clearDetail } from '../../redux/actions';
 
 //validar los inputs del formulario
 const validate = (input, recipes) => {
@@ -40,11 +40,14 @@ const Form = () => {
   const recipes = useSelector(state => state.recipes);
   const diets = useSelector(state => state.diets);
 
-  const [error, setError] = useState({})
+  const [error, setError] = useState({firstTry: true})
 
   useEffect(() => {
     dispatch(getAllRecipes());
     dispatch(getAllDiets());
+    return () => {      //le paso un return cuando se desmonta
+      dispatch(clearDetail())
+    }
   },[dispatch])
 
   const [input, setInput] = useState({
@@ -64,10 +67,12 @@ const Form = () => {
       [e.target.name]: e.target.value,
     });
 
-    setError(validate({
-      ...input,
-      [e.target.name]: e.target.value,
-    },recipesCheck));
+    if(!error.firstTry){
+      setError(validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      },recipesCheck));
+    }
   };
 
   const handleSelect = (e) => {
@@ -80,10 +85,12 @@ const Form = () => {
         diets: [...input.diets, selectedDiet]
       })
 
-      setError(validate({
+    if(!error.firstTry){
+       setError(validate({
         ...input,
         diets: [...input.diets, selectedDiet]
-      },recipesCheck));
+        },recipesCheck));
+      }
     }
   };
 
@@ -93,16 +100,27 @@ const Form = () => {
       diets: input.diets.filter(d => d !== diet)
     })
 
-    setError(validate({
-      ...input,
-      diets: input.diets.filter(d => d !== diet)
-    },recipesCheck));
+    if(!error.firstTry){
+      setError(validate({
+        ...input,
+        diets: input.diets.filter(d => d !== diet)
+      },recipesCheck));
+    }
   };
+
+  const handleCheckErrors = (e)  => {
+    e.preventDefault();
+    setError(validate({
+        ...input,
+        [e.target.name]: e.target.value,
+        diets: [...input.diets, e.target.value]
+    },recipesCheck))
+    handleSubmit(e)
+}
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (Object.keys(error).length === 0 && input.name.length > 0){
+    if(input.name && input.summary && input.healthScore > 0 && input.instructions.length >= 1 && input.diets.length >= 1){
       dispatch(createRecipe(input));
       alert('Your recipe has been created successfully!!')
       setInput({
@@ -113,17 +131,19 @@ const Form = () => {
         instructions: [],
         diets: []
     });
+    error.firstTry = false
     history.push('/home')
-    } else{
+    } 
+    if(error.firstTry){
       alert('please complete the options')
     }
   };
-
+  
   return (
     <div className='container-form'>
       <h1 className='tittle-form'>Create your Recipe!!</h1>
-      <form className='form' onSubmit={handleSubmit}>
-        <div className='form-inpus'>
+      <form className='form' onSubmit={e => handleSubmit(e)}>
+        <div className='form-inputs'>
           <label className='form-name__label'>Name: </label>
           <input type='text'
                  value={input.name}
@@ -139,7 +159,7 @@ const Form = () => {
                   }
         </div>
 
-        <div className='form-inpus'>
+        <div className='form-inputs'>
           <label className='form-image__label'>Image: </label>
           <input type='text'
                  value={input.image}
@@ -155,7 +175,7 @@ const Form = () => {
                   }
         </div>
 
-        <div className='form-inpus'>
+        <div className='form-inputs'>
           <label className='form-summary__label'>Summary: </label>
           <textarea value={input.summary}
                     name='summary'
@@ -170,7 +190,7 @@ const Form = () => {
                   }
         </div>
 
-        <div className='form-inpus'>
+        <div className='form-inputs'>
           <label className='form-healthScore__label'>healthScore: </label>
           <input type='range'
                  name='healthScore'
@@ -178,7 +198,7 @@ const Form = () => {
                  max='100'
                  value={input.healthScore}
                  onChange={handleChange}
-                 className='form-input'/>
+                 className='form-input_range'/>
           <p>{input.healthScore}</p>
               {
                       error.healthScore && (
@@ -187,7 +207,7 @@ const Form = () => {
                   }
         </div>
 
-        <div className='form-inpus'>
+        <div className='form-inputs'>
           <label className='form-instructions__label'>instructions: </label>
           <textarea value={input.instructions}
                     name='instructions'
@@ -202,7 +222,7 @@ const Form = () => {
                   }
         </div>
 
-        <div className='form-inpus'>
+        <div className='form-inputs'>
           <label className='form-diets__label'>Diets: </label>
           <select name='diets' onChange={handleSelect}>
             <option hidden value='default'>Diets</option>
@@ -226,9 +246,19 @@ const Form = () => {
           </div>
         </div>
 
-        <div className='form-submit'>
+        {/* <div className='form-submit'>
           <button className='btn' type='submit'>Create</button>
-        </div>
+        </div> */}
+        <div>
+                    {error.name || 
+                    error.image || 
+                    error.summary || 
+                    error.diets || 
+                    error.healthScore ||
+                    error.instructions ?
+                    <button className='btn' disabled>Create</button>
+                    :<button className='btn' onClick={e => handleCheckErrors(e)}>Create</button>}
+                    </div>
       </form>
       <NavLink to='/home'><button className='btn' >back</button></NavLink>
     </div>

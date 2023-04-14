@@ -1,22 +1,36 @@
 import './detailCard.css'
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getRecipeID } from '../../redux/actions';
+import { NavLink, useParams, useHistory } from 'react-router-dom';
+import { getRecipeID, clearDetail, deleteRecipe } from '../../redux/actions';
 import health from '../../assets/health.png'
 
 
 const DetailCard = () => {
 
   const dispatch =  useDispatch();
+  const history = useHistory();
   const recipe = useSelector(state => state.recipe);
   
-  const { name, image, summary, healthScore, instructions, diets } = recipe;
+  const { name, image, summary, healthScore, instructions, diets, createdInDb } = recipe;
   let { id } = useParams();
 
   useEffect(() => {
     dispatch(getRecipeID(id))
+    return () => {      //le paso un return cuando se desmonta
+      dispatch(clearDetail())
+    }
   },[dispatch, id]);
+
+  const handleDelete = (id) => {
+    const confirmed = window.confirm(`Are you sure to delete the ${name} recipe`)
+    if(confirmed){
+      dispatch(deleteRecipe(id))
+      alert(`The ${name} recipe has been removed`)
+      history.push('/home')
+    }
+  }
+
 
   return (
     <div className='container-detail'>
@@ -74,6 +88,10 @@ const DetailCard = () => {
             </ul>
           )}
         </div>
+        {createdInDb && <button className='btn-delete' onClick={() => handleDelete(id)}>Delete recipe</button>
+        }
+        
+        <NavLink to='/home'><button className='btn' >back</button></NavLink>
     </div>
   )
 };

@@ -9,11 +9,7 @@
   padding: 5rem;
 }
 
-.form{
-  
-}
-
-.form-inpus{
+.form-inputs{
 margin: 2rem 0;
 display: flex;
 flex-direction: column;
@@ -46,7 +42,7 @@ flex-direction: column;
   -o-transform: scale(1.1);
 }
 
-.form-inpus select{
+.form-inputs select{
   width: 22rem;
   height: 2rem;
   border-radius: 10px;
@@ -54,17 +50,29 @@ flex-direction: column;
 }
 
 .form-deletes{
+  width: 30rem;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .form-deletes__div{
   margin: 5px;
-  border-bottom: solid 2px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .form-deletes__div button{
-  padding: 1px 3px;
+  padding: 1px 4px;
+  margin: 3px 5px;
+  background-color: transparent;
+  border: solid 1px #000;
+  border-radius: 3px;
 
+}
+
+.form-deletes__div button:hover{
+  background-color: #8c3961;
 }
 
 .form-input{
@@ -73,6 +81,10 @@ flex-direction: column;
   border-radius: 10px;
   border: none;
   padding: 5px;
+}
+
+.form-input_range{
+  background-color: #00b8ff;
 }
 
 .form-textarea{
@@ -89,5 +101,6 @@ flex-direction: column;
 }
 
 .form-p{
+  color: #ffffff;
   font-size: 12px;
 }

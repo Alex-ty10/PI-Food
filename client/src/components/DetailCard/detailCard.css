@@ -6,9 +6,10 @@
   align-items: center;
   background-color: #5fc7ff;
   color: #ffffff;
+  padding: 4rem 0;
 }
 
-.datail-image img{ width: 100hv; 
+.datail-image img{ 
   border-radius: 15px;
 }
 
@@ -66,10 +67,6 @@ color: #000;
   border:solid 2px #000;
   border-radius: 10px;
   padding: 5px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
 }
 
 .info-detail{
@@ -78,7 +75,7 @@ color: #000;
   justify-content: space-between;
 }
 
-.info-summary{
+.info-summary, .info-instructions{
   background-color: #ffffff;
   border-radius: 15px;
   width: 45%;
@@ -88,25 +85,22 @@ color: #000;
  
 }
 
-.info-summary h2{
+.info-summary h2, .info-instructions h2{
   font-size: 1.7rem;
   color: #000;
   margin: 2rem;
   border-bottom:solid #000;
 }
 
-.info-instructions{
-  background-color: #ffffff;
-  border-radius: 15px;
-  width: 45%;
-  color: #000;
-  padding: 2rem;
+.btn-delete{
+  align-self: flex-start;
+  border-radius: 10px;
   border: solid 2px #000;
+  margin: 0 4rem;
+  padding: 0.5rem 1.5rem;
+ background-color: #ffffff;
 }
 
-.info-instructions h2{
-  font-size: 1.7rem;
-  color: #000;
-  margin: 2rem;
-  border-bottom:solid #000;
+.btn-delete:hover{
+  background-color: #8c3961;
 }
